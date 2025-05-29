@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>App-Ads.txt Viewer</title>
+  <style>
+    body {
+      font-family: monospace, monospace;
+      white-space: pre-wrap;
+      padding: 20px;
+      background: #f0f0f0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contents of app-ads.txt</h1>
+  <pre id="ads-content">Loading...</pre>
+
+  <script>
+    fetch('app-ads.txt')
+      .then(response => {
+        if (!response.ok) throw new Error('File not found');
+        return response.text();
+      })
+      .then(text => {
+        document.getElementById('ads-content').textContent = text;
+      })
+      .catch(err => {
+        document.getElementById('ads-content').textContent = 'Error loading app-ads.txt';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
